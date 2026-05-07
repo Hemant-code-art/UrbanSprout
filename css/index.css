@@ -208,23 +208,14 @@
     opacity: 0.8;
 }
 
-/* --- Section Dividers (Amazing Slants) --- */
-.slant-divider {
-    height: 150px;
-    background: var(--bg-dark);
-    clip-path: polygon(0 0, 100% 100%, 100% 100%, 0 100%);
-    margin-top: -150px;
-    position: relative;
-    z-index: 5;
-}
-
-/* --- Interactive Previews --- */
+/* --- Standard Section Transitions --- */
 .page-previews {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 4rem;
-    padding: 150px 8% 100px;
+    padding: 100px 8%;
     background: linear-gradient(180deg, #050805 0%, #0a0f0a 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .preview-card {
@@ -282,9 +273,9 @@
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.neural-card:nth-child(1) { transform: rotate(-1deg); }
-.neural-card:nth-child(2) { transform: rotate(1.5deg); top: 170px; }
-.neural-card:nth-child(3) { transform: rotate(-0.5deg); top: 190px; }
+.neural-card:nth-child(1) { top: 150px; }
+.neural-card:nth-child(2) { top: 170px; }
+.neural-card:nth-child(3) { top: 190px; }
 
 .neural-card:hover {
     transform: scale(1.02) rotate(0deg);
