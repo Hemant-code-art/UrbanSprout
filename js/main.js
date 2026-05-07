@@ -63,17 +63,93 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 4. Cart Logic
+    // 4. Cart Logic (Extra & Unique)
     let cart = JSON.parse(localStorage.getItem('urbanSproutCart')) || [];
-    const cartCountEl = document.getElementById('cartCount');
     
-    const updateCartUI = () => {
-        if (cartCountEl) {
-            cartCountEl.textContent = cart.length;
-            cartCountEl.style.display = cart.length > 0 ? 'flex' : 'none';
-        }
-        localStorage.setItem('urbanSproutCart', JSON.stringify(cart));
+    // Inject Cart Drawer & Trigger
+    const injectCartUI = () => {
+        const cartHTML = `
+            <div class="cart-drawer" id="cartDrawer">
+                <div class="cart-header">
+                    <h2>Garden Kit</h2>
+                    <button class="close-cart" id="closeCart">&times;</button>
+                </div>
+                <div class="cart-items" id="cartItemsList">
+                    <!-- Items injected here -->
+                </div>
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        <span>Total</span>
+                        <span id="cartTotalValue">Rs. 0</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="alert('Proceeding to Secure Neural Checkout...')">Checkout</button>
+                </div>
+            </div>
+            <div class="cart-trigger" id="cartTrigger">
+                <span>🛒</span>
+                <span class="cart-trigger-count" id="cartTriggerCount">0</span>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', cartHTML);
     };
+
+    injectCartUI();
+
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartItemsList = document.getElementById('cartItemsList');
+    const cartTrigger = document.getElementById('cartTrigger');
+    const cartTriggerCount = document.getElementById('cartTriggerCount');
+    const cartTotalValue = document.getElementById('cartTotalValue');
+    const closeCart = document.getElementById('closeCart');
+
+    const updateCartUI = () => {
+        // Update Trigger
+        cartTriggerCount.textContent = cart.length;
+        cartTrigger.style.display = cart.length > 0 ? 'flex' : 'none';
+
+        // Render Drawer Items
+        cartItemsList.innerHTML = '';
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            const price = parseInt(item.price.replace(/[^0-9]/g, '')) || 0;
+            total += price;
+
+            const itemEl = document.createElement('div');
+            itemEl.className = 'cart-item';
+            itemEl.innerHTML = `
+                <div class="cart-item-info">
+                    <h4>${item.name}</h4>
+                    <p>${item.price}</p>
+                </div>
+                <button class="close-cart" style="font-size: 1.2rem;" onclick="removeFromCart(${index})">&times;</button>
+            `;
+            cartItemsList.appendChild(itemEl);
+        });
+
+        cartTotalValue.textContent = `Rs. ${total.toLocaleString()}`;
+        localStorage.setItem('urbanSproutCart', JSON.stringify(cart));
+        
+        // Also update navbar if exists (legacy support)
+        const legacyCount = document.getElementById('cartCount');
+        if (legacyCount) {
+            legacyCount.textContent = cart.length;
+            legacyCount.parentElement.style.display = cart.length > 0 ? 'flex' : 'none';
+        }
+    };
+
+    window.removeFromCart = (index) => {
+        cart.splice(index, 1);
+        updateCartUI();
+    };
+
+    const toggleCart = (state) => {
+        if (state) cartDrawer.classList.add('open');
+        else cartDrawer.classList.remove('open');
+    };
+
+    cartTrigger.addEventListener('click', () => toggleCart(true));
+    closeCart.addEventListener('click', () => toggleCart(false));
 
     const showNotification = (message) => {
         let container = document.querySelector('.notification-container');
@@ -99,10 +175,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.classList.contains('btn-primary') && e.target.textContent.includes('Add to Cart')) {
             const card = e.target.closest('.product-card') || e.target.closest('.arrival-card');
             const name = card.querySelector('h3, h4').textContent;
+            const price = card.querySelector('p').textContent;
             
-            cart.push({ name, price: card.querySelector('p').textContent });
+            cart.push({ name, price });
             updateCartUI();
-            showNotification(`${name} added to your garden kit!`);
+            showNotification(`${name} added to your kit!`);
+            
+            // Auto-open drawer on add
+            setTimeout(() => toggleCart(true), 500);
         }
     });
 
