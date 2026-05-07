@@ -130,8 +130,8 @@ header {
 }
 
 header.scrolled {
-    top: 15px;
-    width: 70%; /* More significant shrink */
+    top: 10px;
+    width: 60%; /* Even more compact width */
 }
 
 nav {
@@ -148,10 +148,10 @@ nav {
 }
 
 header.scrolled nav {
-    padding: 0.5rem 2rem; /* Even slimmer height */
-    background: rgba(5, 8, 5, 0.9);
-    border-color: rgba(0, 255, 136, 0.3);
-    box-shadow: 0 5px 25px rgba(0, 255, 136, 0.15);
+    padding: 0.4rem 1.5rem; /* Ultra-slim height */
+    background: rgba(5, 8, 5, 0.95);
+    border-color: rgba(0, 255, 136, 0.4);
+    box-shadow: 0 5px 30px rgba(0, 255, 136, 0.2);
 }
 
 /* --- Amazing Cyber-Footer --- */
@@ -309,7 +309,7 @@ header.scrolled .logo {
 }
 
 header.scrolled .nav-links {
-    gap: 1.8rem;
+    gap: 1.2rem;
 }
 
 .nav-links a {
