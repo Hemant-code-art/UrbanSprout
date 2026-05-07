@@ -269,4 +269,48 @@ document.addEventListener('DOMContentLoaded', () => {
             loginCard.style.transform = `perspective(1500px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         });
     }
+    // 8. Custom Reactive Cursor
+    const cursorDot = document.createElement('div');
+    const cursorOutline = document.createElement('div');
+    cursorDot.className = 'cursor-dot';
+    cursorOutline.className = 'cursor-outline';
+    document.body.appendChild(cursorDot);
+    document.body.appendChild(cursorOutline);
+
+    let mouseX = 0, mouseY = 0;
+    let outlineX = 0, outlineY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+    });
+
+    const animateCursor = () => {
+        let distX = mouseX - outlineX;
+        let distY = mouseY - outlineY;
+        outlineX = outlineX + distX * 0.15;
+        outlineY = outlineY + distY * 0.15;
+        cursorOutline.style.left = outlineX + 'px';
+        cursorOutline.style.top = outlineY + 'px';
+        requestAnimationFrame(animateCursor);
+    };
+    animateCursor();
+
+    const hoverables = document.querySelectorAll('a, button, .btn, .product-card, .arrival-card, .portfolio-card, .article');
+    hoverables.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursorOutline.style.width = '70px';
+            cursorOutline.style.height = '70px';
+            cursorOutline.style.backgroundColor = 'rgba(0, 255, 136, 0.1)';
+            cursorOutline.style.borderColor = 'transparent';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursorOutline.style.width = '40px';
+            cursorOutline.style.height = '40px';
+            cursorOutline.style.backgroundColor = 'transparent';
+            cursorOutline.style.borderColor = 'var(--primary-color)';
+        });
+    });
 });

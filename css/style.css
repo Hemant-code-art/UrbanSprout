@@ -10,7 +10,32 @@
     --text-muted: #a0b0a0;
     --glass-border: rgba(255, 255, 255, 0.1);
     --glow-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-    --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Custom Cursor --- */
+.cursor-dot, .cursor-outline {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--primary-color);
+    transition: all 0.15s ease-out;
 }
 
 /* --- Global Reset & Base Styles --- */
@@ -18,7 +43,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: default;
+    cursor: none !important; /* Hide default cursor */
 }
 
 html {
