@@ -1,0 +1,81 @@
+/* 
+   UrbanSprout - research.css
+   Styles for the Research comparison table.
+*/
+
+.research-container {
+    padding: 150px 5% 100px;
+}
+
+.research-container h1 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 3rem;
+    font-family: 'Outfit', sans-serif;
+    text-align: center;
+}
+
+.research-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 3rem;
+    background: var(--bg-card);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+
+.research-table th, .research-table td {
+    padding: 2rem;
+    text-align: left;
+    border-bottom: 1px solid var(--glass-border);
+    color: var(--text-muted);
+}
+
+.research-table th {
+    background-color: rgba(0, 255, 136, 0.1);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+.research-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.research-table tr:hover td {
+    color: #fff;
+}
+
+.reference-list {
+    margin-top: 6rem;
+}
+
+.reference-list h3 {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.reference-item {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+    transition: var(--transition-smooth);
+}
+
+.reference-item:hover {
+    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.05);
+    border-left-width: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}

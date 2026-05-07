@@ -1,0 +1,160 @@
+/* 
+   UrbanSprout - blog.css
+   Mindblowing futuristic blog experience.
+*/
+
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 180px 5% 100px;
+}
+
+/* --- Reading Progress Bar --- */
+.progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    z-index: 3000;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    width: 0%;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* --- Article Styling --- */
+.article {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    padding: 5rem;
+    border-radius: 40px;
+    margin-bottom: 8rem;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.article::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 255, 136, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.article:hover {
+    border-color: var(--primary-color);
+}
+
+.article:hover::before {
+    opacity: 1;
+}
+
+.article-meta {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    gap: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.article h2 {
+    color: #fff;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 3rem;
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.1;
+    background: linear-gradient(90deg, #fff, #888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: var(--transition-smooth);
+}
+
+.article:hover h2 {
+    background: linear-gradient(90deg, #fff, var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.article p {
+    margin-bottom: 2rem;
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    line-height: 1.8;
+}
+
+.article-img-wrapper {
+    width: 100%;
+    height: 500px;
+    border-radius: 30px;
+    overflow: hidden;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.article-img {
+    width: 100%;
+    height: 120%; /* For parallax */
+    object-fit: cover;
+    filter: brightness(0.7) contrast(1.1);
+    transition: filter 0.6s ease, transform 0.1s linear;
+    position: absolute;
+    top: -10%;
+}
+
+.article:hover .article-img {
+    filter: brightness(1) contrast(1);
+}
+
+.tech-highlight {
+    border-left: 5px solid var(--primary-color);
+    background: linear-gradient(90deg, rgba(0, 255, 136, 0.05), transparent);
+    padding: 3rem;
+    margin: 4rem 0;
+    font-style: italic;
+    color: #fff;
+    font-size: 1.4rem;
+    border-radius: 0 24px 24px 0;
+    box-shadow: inset 15px 0 30px rgba(0, 255, 136, 0.05);
+}
+
+/* --- Floating Decorations --- */
+.floating-element {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+    filter: blur(80px);
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: -1;
+    animation: floatAround 20s infinite alternate;
+}
+
+@keyframes floatAround {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(100vw, 100vh); }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .article { padding: 2.5rem; }
+    .article h2 { font-size: 2.5rem; }
+    .article-img-wrapper { height: 300px; }
+}

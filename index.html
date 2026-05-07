@@ -1,0 +1,157 @@
+<!-- 
+    UrbanSprout Home Page
+    Contains an overview of the entire website's contents.
+    Logical Divisions: Header, Hero, New Arrivals, Page Previews, Mission, Footer.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="UrbanSprout - Your guide to sustainable urban gardening, balcony seeds, and kitchen planters.">
+    <title>UrbanSprout | Sustainable Urban Gardening</title>
+    
+    <!-- External CSS: Global and Page-specific -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <nav id="main-nav">
+            <a href="index.html" class="logo">UrbanSprout</a>
+            <ul class="nav-links">
+                <li><a href="index.html" style="color: var(--primary-color);">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li class="cart-nav-link">
+                    <a href="#">Cart</a>
+                    <span id="cartCount" class="cart-count" style="display: none;">0</span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Breathe Life<br>into Your Space</h1>
+            <p>UrbanSprout helps city dwellers transform their balconies and kitchens into lush, sustainable gardens with our curated kits and expert guides.</p>
+            <div class="hero-btns">
+                <a href="products.html" class="btn btn-primary">Explore Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: New Arrivals Scrolling -->
+    <section class="new-arrivals-section">
+        <h2>New Arrivals</h2>
+        <div class="arrival-slider-container">
+            <button class="slider-btn prev" onclick="moveSlider(-1)">&#10094;</button>
+            <div class="arrival-slider" id="arrivalSlider">
+                <div class="arrival-card">
+                    <img src="images/seed_kit.png" alt="Bonsai Kit">
+                    <h4>Mini Bonsai Kit</h4>
+                    <p>Rs. 3,250</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+                <div class="arrival-card">
+                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=400&q=80" alt="Pruning Shears">
+                    <h4>Precision Shears</h4>
+                    <p>Rs. 2,400</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+                <div class="arrival-card">
+                    <img src="https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?auto=format&fit=crop&w=400&q=80" alt="Self Watering Pot">
+                    <h4>Smart Water Pot</h4>
+                    <p>Rs. 4,160</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+                <div class="arrival-card">
+                    <img src="https://images.unsplash.com/photo-1592150621344-82454b9df356?auto=format&fit=crop&w=400&q=80" alt="Compost">
+                    <h4>Organic Mix</h4>
+                    <p>Rs. 1,690</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+            <button class="slider-btn next" onclick="moveSlider(1)">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- Section: Content Overview -->
+    <main>
+        <section class="page-previews">
+            <div class="preview-card">
+                <div>
+                    <h3>Our Products</h3>
+                    <p>Discover our range of eco-friendly seed kits, ergonomic tools, and self-watering planters designed for small spaces.</p>
+                </div>
+                <a href="products.html" class="btn">View Store</a>
+            </div>
+            <div class="preview-card">
+                <div>
+                    <h3>The Blog</h3>
+                    <p>Read about the intersection of technology and nature, and get practical tips on growing your own food at home.</p>
+                </div>
+                <a href="blog.html" class="btn">Read Articles</a>
+            </div>
+            <div class="preview-card">
+                <div>
+                    <h3>Research Hub</h3>
+                    <p>Explore our analysis of sustainable web components and urban agriculture practices compared to industry standards.</p>
+                </div>
+                <a href="research.html" class="btn">Learn More</a>
+            </div>
+            <div class="preview-card">
+                <div>
+                    <h3>About the Team</h3>
+                    <p>Meet the passionate individuals behind UrbanSprout and learn about our technical and environmental expertise.</p>
+                </div>
+                <a href="about.html" class="btn">Our Team</a>
+            </div>
+        </section>
+
+        <!-- Mission Statement -->
+        <section class="mission-section">
+            <div class="glass" style="padding: 5rem; border-radius: 40px; text-align: center;">
+                <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Our Sustainable Mission</h2>
+                <p style="max-width: 800px; margin: 0 auto; font-size: 1.5rem; font-style: italic; color: #fff;">
+                    "To empower every urban resident with the tools and knowledge to grow their own sustainable food source, one sprout at a time."
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>UrbanSprout</h3>
+                <p>Cultivating sustainability in the concrete jungle.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul style="list-style: none;">
+                    <li><a href="index.html" style="color: white; text-decoration: none;">Home</a></li>
+                    <li><a href="products.html" style="color: white; text-decoration: none;">Products</a></li>
+                    <li><a href="blog.html" style="color: white; text-decoration: none;">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: hello@urbansprout.com</p>
+                <p>Phone: +1 234 567 890</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 UrbanSprout Project. Designed by Students.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

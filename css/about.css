@@ -1,0 +1,119 @@
+/* 
+   UrbanSprout - about.css
+   Styles for the Team Portfolios.
+*/
+
+.team-container {
+    padding: 150px 5% 100px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 4rem;
+}
+
+.portfolio-card {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    padding: 3rem;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
+    opacity: 0;
+    transition: var(--transition-smooth);
+    pointer-events: none;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    border-color: var(--primary-color);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+.portfolio-card:hover::before {
+    opacity: 1;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 2px solid var(--primary-color);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    animation: morph 8s ease-in-out infinite;
+}
+
+@keyframes morph {
+    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+}
+
+.member-name {
+    font-size: 2.2rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.member-role {
+    color: var(--primary-color);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.portfolio-section {
+    margin-bottom: 2.5rem;
+}
+
+.portfolio-section h4 {
+    color: var(--secondary-color);
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.skill-tag {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    margin: 0 8px 8px 0;
+    transition: var(--transition-smooth);
+}
+
+.portfolio-card:hover .skill-tag {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: rgba(0, 255, 136, 0.05);
+}
+

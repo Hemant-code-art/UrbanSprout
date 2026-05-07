@@ -1,0 +1,94 @@
+/* 
+   UrbanSprout - login.css
+   Styles for the Login page.
+*/
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    position: relative;
+}
+
+.login-card {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    padding: 4rem;
+    border-radius: 32px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    transition: var(--transition-smooth);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+
+.login-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 30px rgba(0, 255, 136, 0.1);
+}
+
+.login-card h2 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.8rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    font-size: 1rem;
+    color: #fff;
+    transition: var(--transition-smooth);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: rgba(0, 255, 136, 0.08);
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+}
+
+.login-card .btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.login-footer {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.login-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 5px;
+    transition: var(--transition-smooth);
+}
+
+.login-footer a:hover {
+    text-shadow: 0 0 10px var(--primary-color);
+}

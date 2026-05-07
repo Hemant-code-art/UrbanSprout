@@ -1,0 +1,68 @@
+/* 
+   UrbanSprout - contact.css
+   Styles for the Contact page.
+*/
+
+.contact-container {
+    max-width: 800px;
+    margin: 150px auto 100px;
+    padding: 5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(15px);
+    border-radius: 32px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+
+.contact-container h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 3rem;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+}
+
+.form-group {
+    margin-bottom: 2.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #fff;
+    transition: var(--transition-smooth);
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: rgba(0, 255, 136, 0.08);
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+    transform: scale(1.02);
+}
+
+.contact-container .btn {
+    width: 100%;
+}
+
+#formFeedback {
+    margin-top: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--secondary-color);
+}
