@@ -1,7 +1,148 @@
-/* 
-   UrbanSprout - index.css
-   High-Fidelity Immersive Home Experience.
-*/
+/* --- Amazing Visual Layer --- */
+.parallax-element {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    filter: blur(2px);
+    opacity: 0.4;
+    animation: floatElement 15s infinite alternate ease-in-out;
+}
+
+.leaf-1 { width: 150px; height: 150px; background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%); top: 15%; left: 5%; animation-delay: -2s; }
+.leaf-2 { width: 200px; height: 200px; background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%); bottom: 20%; right: 10%; animation-delay: -5s; }
+.orb-1 { width: 100px; height: 100px; background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%); top: 40%; right: 20%; animation-delay: -8s; }
+
+@keyframes floatElement {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(50px, 100px) rotate(15deg); }
+}
+
+.shimmer-text {
+    background: linear-gradient(90deg, #fff 0%, var(--primary-color) 50%, #fff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 8s linear infinite;
+}
+
+@keyframes shimmer {
+    to { background-position: 200% center; }
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-bottom: 4rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-count {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    font-family: 'Outfit', sans-serif;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+}
+
+/* --- Holographic Portfolio --- */
+.portfolio-section {
+    padding: 150px 8%;
+    background: #050805;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 4rem;
+}
+
+.portfolio-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+    padding: 2.5rem;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-20px);
+    border-color: var(--primary-color);
+}
+
+.portfolio-img-container {
+    height: 400px;
+    border-radius: 35px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.portfolio-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s ease;
+}
+
+.portfolio-card:hover img {
+    transform: scale(1.15);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 255, 136, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.4s;
+    backdrop-filter: blur(10px);
+}
+
+.portfolio-card:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-overlay span {
+    font-weight: 900;
+    letter-spacing: 5px;
+    font-size: 1.2rem;
+}
+
+.portfolio-info h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.portfolio-metrics {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.portfolio-metrics span {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+}
 
 /* --- Immersive Hero Mesh --- */
 .hero {
