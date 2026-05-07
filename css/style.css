@@ -317,6 +317,25 @@ header.scrolled .nav-links {
     font-size: 0.9rem;
     color: var(--text-muted);
     letter-spacing: 1px;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    left: 0;
 }
 
 .nav-links a:hover {
