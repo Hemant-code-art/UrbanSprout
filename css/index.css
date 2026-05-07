@@ -97,7 +97,7 @@
 .preview-card:hover {
     background: rgba(255, 255, 255, 0.05);
     border-color: var(--primary-color-dim);
-    transform: translateY(-20px) scale(1.02);
+    transform: translateY(-20px);
 }
 
 .preview-card h3 {
@@ -113,10 +113,12 @@
     margin-bottom: 2.5rem;
 }
 
-/* --- New Arrivals Upgrade --- */
+/* --- Improved New Arrivals Section --- */
 .new-arrivals-section {
     padding: 150px 5%;
-    background: #0a0f0a;
+    background: linear-gradient(180deg, #0a0f0a 0%, #050805 100%);
+    position: relative;
+    overflow: hidden;
 }
 
 .new-arrivals-section h2 {
@@ -130,31 +132,72 @@
     -webkit-text-fill-color: transparent;
 }
 
+.arrival-slider-container {
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(10px);
+    border-radius: 60px;
+    padding: 60px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
 .arrival-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(10, 15, 10, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 40px;
+    border-radius: 45px;
     padding: 1.5rem;
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
 }
 
 .arrival-card:hover {
     background: rgba(255, 255, 255, 0.06);
-    transform: translateY(-15px) rotate(1deg);
+    transform: translateY(-10px); /* Removed tilt */
+    border-color: var(--primary-color-dim);
 }
 
 .arrival-card img {
-    height: 350px;
-    border-radius: 30px;
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 35px;
     margin-bottom: 2rem;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Custom Buttons for Home */
-.hero .btn-primary {
-    padding: 1.2rem 3rem;
-    font-size: 1.1rem;
-    letter-spacing: 2px;
+.arrival-card:hover img {
+    transform: scale(1.05); /* Zoom effect instead of tilt */
+}
+
+/* Floating Price Badge */
+.arrival-price-badge {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: var(--primary-color);
+    color: #000;
+    padding: 10px 20px;
     border-radius: 100px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
+    z-index: 10;
+}
+
+.slider-btn {
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 255, 136, 0.05);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 2rem;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.slider-btn:hover {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 40px var(--primary-color);
+    transform: translateY(-50%) scale(1.1);
 }
 
 /* --- Responsive Adjustments --- */
