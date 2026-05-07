@@ -117,7 +117,7 @@ img {
     background: #fff;
 }
 
-/* --- iOS 26: Glassy Pill Navbar (Restored) --- */
+/* --- iOS 26: Smooth-Shrink Glassy Pill --- */
 header {
     position: fixed;
     top: 30px;
@@ -126,12 +126,12 @@ header {
     width: 90%;
     max-width: 1200px;
     z-index: 1000;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); /* Ultra-smooth liquid transition */
 }
 
 header.scrolled {
     top: 15px;
-    width: 85%;
+    width: 70%; /* More significant shrink */
 }
 
 nav {
@@ -139,16 +139,19 @@ nav {
     backdrop-filter: blur(25px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 100px;
-    padding: 1rem 3rem;
+    padding: 1.2rem 3.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 header.scrolled nav {
-    padding: 0.8rem 2.5rem;
-    background: rgba(5, 8, 5, 0.8);
+    padding: 0.7rem 2rem;
+    background: rgba(5, 8, 5, 0.85);
+    border-color: rgba(0, 255, 136, 0.2);
+    box-shadow: 0 5px 20px rgba(0, 255, 136, 0.1);
 }
 
 .logo {
@@ -156,11 +159,21 @@ header.scrolled nav {
     font-weight: 900;
     color: var(--primary-color);
     text-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+    transition: all 0.8s ease;
+}
+
+header.scrolled .logo {
+    font-size: 1.4rem;
 }
 
 .nav-links {
     display: flex;
     gap: 2.5rem;
+    transition: all 0.8s ease;
+}
+
+header.scrolled .nav-links {
+    gap: 1.8rem;
 }
 
 .nav-links a {
