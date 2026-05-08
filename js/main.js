@@ -3,6 +3,126 @@
  * Futuristic interactions and animations.
  */
 
+// ===== CART GLOBAL STATE =====
+let cart = JSON.parse(localStorage.getItem('urbanSproutCart')) || [];
+
+// ===== CART FUNCTIONS =====
+const showCartNotification = (message) => {
+    let container = document.querySelector('.notification-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'notification-container';
+        document.body.appendChild(container);
+    }
+
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.innerHTML = `<span>🌱</span> ${message}`;
+    container.appendChild(notification);
+
+    setTimeout(() => {
+        notification.classList.add('fade-out');
+        setTimeout(() => notification.remove(), 500);
+    }, 3000);
+};
+
+const updateCartUI = () => {
+    const cartTriggerCount = document.getElementById('cartTriggerCount');
+    const cartTrigger = document.getElementById('cartTrigger');
+    const cartItemsList = document.getElementById('cartItemsList');
+    const cartTotalValue = document.getElementById('cartTotalValue');
+
+    if (!cartTriggerCount || !cartItemsList || !cartTotalValue) return;
+
+    // Update trigger
+    cartTriggerCount.textContent = cart.length;
+    cartTrigger.style.display = cart.length > 0 ? 'flex' : 'none';
+
+    // Render items
+    cartItemsList.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        const price = parseInt(item.price.replace(/[^0-9]/g, '')) || 0;
+        total += price;
+
+        const itemEl = document.createElement('div');
+        itemEl.className = 'cart-item';
+        itemEl.innerHTML = `
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p>${item.price}</p>
+            </div>
+            <button class="close-cart" style="font-size: 1.2rem;" onclick="window.removeFromCart(${index})">&times;</button>
+        `;
+        cartItemsList.appendChild(itemEl);
+    });
+
+    cartTotalValue.textContent = `Rs. ${total.toLocaleString()}`;
+    localStorage.setItem('urbanSproutCart', JSON.stringify(cart));
+};
+
+window.addToCart = (productName, productPrice) => {
+    if (!productName || !productPrice) {
+        showCartNotification('Error: Product information missing');
+        return false;
+    }
+
+    cart.push({ name: productName, price: productPrice });
+    updateCartUI();
+    showCartNotification(`${productName} added to your kit!`);
+
+    setTimeout(() => {
+        const cartDrawer = document.getElementById('cartDrawer');
+        if (cartDrawer) {
+            cartDrawer.classList.add('open');
+        }
+    }, 500);
+
+    return true;
+};
+
+window.removeFromCart = (index) => {
+    if (index >= 0 && index < cart.length) {
+        cart.splice(index, 1);
+        updateCartUI();
+    }
+};
+
+window.handleAddToCartClick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const btn = event.target;
+    const card = btn.closest('.product-card') || btn.closest('.arrival-card') || btn.closest('.neural-card');
+    
+    if (!card) {
+        showCartNotification('Error: Could not find product information');
+        return false;
+    }
+
+    const nameEl = card.querySelector('.product-name, h3, h4');
+    const name = nameEl ? nameEl.textContent.trim() : 'Unknown Item';
+    
+    let priceText = 'Rs. 0';
+    const discountPrice = card.querySelector('.discount-price');
+    const arrivalPrice = card.querySelector('.arrival-price-badge');
+    
+    if (discountPrice) {
+        priceText = discountPrice.textContent.trim();
+    } else if (arrivalPrice) {
+        priceText = arrivalPrice.textContent.trim();
+    } else {
+        const priceEl = card.querySelector('.product-price');
+        if (priceEl) {
+            const allText = priceEl.textContent.trim();
+            priceText = allText.split('\n')[0].trim();
+        }
+    }
+
+    return addToCart(name, priceText);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Scroll Reveal Animation
     const observerOptions = {
@@ -63,10 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 4. Cart Logic (Extra & Unique)
-    let cart = JSON.parse(localStorage.getItem('urbanSproutCart')) || [];
-    
-    // Inject Cart Drawer & Trigger
+    // 4. Cart Logic - Inject UI and set up event listeners
     const injectCartUI = () => {
         const cartHTML = `
             <div class="cart-drawer" id="cartDrawer">
@@ -95,109 +212,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     injectCartUI();
 
+    // Set up cart event listeners
     const cartDrawer = document.getElementById('cartDrawer');
-    const cartItemsList = document.getElementById('cartItemsList');
     const cartTrigger = document.getElementById('cartTrigger');
-    const cartTriggerCount = document.getElementById('cartTriggerCount');
-    const cartTotalValue = document.getElementById('cartTotalValue');
     const closeCart = document.getElementById('closeCart');
 
-    const updateCartUI = () => {
-        // Update Trigger
-        cartTriggerCount.textContent = cart.length;
-        cartTrigger.style.display = cart.length > 0 ? 'flex' : 'none';
-
-        // Render Drawer Items
-        cartItemsList.innerHTML = '';
-        let total = 0;
-
-        cart.forEach((item, index) => {
-            const price = parseInt(item.price.replace(/[^0-9]/g, '')) || 0;
-            total += price;
-
-            const itemEl = document.createElement('div');
-            itemEl.className = 'cart-item';
-            itemEl.innerHTML = `
-                <div class="cart-item-info">
-                    <h4>${item.name}</h4>
-                    <p>${item.price}</p>
-                </div>
-                <button class="close-cart" style="font-size: 1.2rem;" onclick="removeFromCart(${index})">&times;</button>
-            `;
-            cartItemsList.appendChild(itemEl);
+    if (cartTrigger) {
+        cartTrigger.addEventListener('click', () => {
+            cartDrawer.classList.add('open');
         });
+    }
 
-        cartTotalValue.textContent = `Rs. ${total.toLocaleString()}`;
-        localStorage.setItem('urbanSproutCart', JSON.stringify(cart));
-        
-        // Also update navbar if exists (legacy support)
-        const legacyCount = document.getElementById('cartCount');
-        if (legacyCount) {
-            legacyCount.textContent = cart.length;
-            legacyCount.parentElement.style.display = cart.length > 0 ? 'flex' : 'none';
-        }
-    };
+    if (closeCart) {
+        closeCart.addEventListener('click', () => {
+            cartDrawer.classList.remove('open');
+        });
+    }
 
-    window.removeFromCart = (index) => {
-        cart.splice(index, 1);
-        updateCartUI();
-    };
-
-    const toggleCart = (state) => {
-        if (state) cartDrawer.classList.add('open');
-        else cartDrawer.classList.remove('open');
-    };
-
-    cartTrigger.addEventListener('click', () => toggleCart(true));
-    closeCart.addEventListener('click', () => toggleCart(false));
-
-    const showNotification = (message) => {
-        let container = document.querySelector('.notification-container');
-        if (!container) {
-            container = document.createElement('div');
-            container.className = 'notification-container';
-            document.body.appendChild(container);
-        }
-
-        const notification = document.createElement('div');
-        notification.className = 'notification';
-        notification.innerHTML = `<span>🌱</span> ${message}`;
-        container.appendChild(notification);
-
-        setTimeout(() => {
-            notification.classList.add('fade-out');
-            setTimeout(() => notification.remove(), 500);
-        }, 3000);
-    };
-
-    // Global listener for "Add to Cart" buttons
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-primary') && e.target.textContent.includes('Add to Cart')) {
-            const card = e.target.closest('.product-card') || e.target.closest('.arrival-card');
-            const name = card.querySelector('h3, h4').textContent;
-            const price = card.querySelector('p').textContent;
-            
-            cart.push({ name, price });
-            updateCartUI();
-            showNotification(`${name} added to your kit!`);
-            
-            // Auto-open drawer on add
-            setTimeout(() => toggleCart(true), 500);
-        }
-    });
+    // Initial UI update
+    updateCartUI();
 
     // Handle Contact Form Submission
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            showNotification('Message sent! Our experts will contact you soon.');
+            showCartNotification('Message sent! Our experts will contact you soon.');
             contactForm.reset();
         });
     }
-
-    // Initial UI Update
-    updateCartUI();
 
     // 5. Blog Page Interactions (Progress Bar & Parallax)
     const progressBar = document.getElementById('progressBar');

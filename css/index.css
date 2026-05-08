@@ -236,7 +236,7 @@
 
 .preview-card h3 {
     font-size: 2.2rem;
-    color: #fff;
+    color: var(--primary-color);
     margin-bottom: 1.5rem;
     font-family: 'Outfit', sans-serif;
 }
